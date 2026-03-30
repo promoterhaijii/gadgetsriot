@@ -1,378 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Direct - Amazon, Flipkart, Meesho</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Deals Hub</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+<style>
+body{font-family:Arial;margin:0;background:#f5f5f5}
+header{background:#111;color:#fff;padding:20px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
+.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center}
+.card img{max-width:100%;height:180px;object-fit:cover;border-radius:8px}
+.btn{display:inline-block;margin-top:10px;padding:10px 15px;background:#ff9900;color:#fff;text-decoration:none;border-radius:6px}
+</style>
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .search-container {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: end;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            min-width: 300px;
-            padding: 15px 20px;
-            font-size: 1.1rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .platform-btn {
-            padding: 15px 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-width: 140px;
-            justify-content: center;
-        }
-
-        .btn-amazon { background: #ff9900; color: white; }
-        .btn-flipkart { background: #2874f0; color: white; }
-        .btn-meesho { background: #ff5080; color: white; }
-
-        .platform-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .platform-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .platform-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .platform-card:hover::before {
-            left: 100%;
-        }
-
-        .platform-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-
-        .platform-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .platform-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .platform-card p {
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-
-        .quick-links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .quick-link {
-            padding: 12px 24px;
-            background: #f8f9fa;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .quick-link:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .search-box { flex-direction: column; align-items: stretch; }
-            input[type="text"] { min-width: auto; }
-            .platform-btn { width: 100%; }
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            color: #667eea;
-        }
-
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🛒 Shop Direct</h1>
-            <p class="subtitle">Quick links to your favorite products on Amazon, Flipkart & Meesho</p>
-        </header>
 
-        <div class="search-container">
-            <div class="search-box">
-                <input type="text" id="productSearch" placeholder="🔍 Enter product name or URL..." autocomplete="off">
-                <a href="#" id="amazonBtn" class="platform-btn btn-amazon">
-                    <span>🛒</span> Amazon
-                </a>
-                <a href="#" id="flipkartBtn" class="platform-btn btn-flipkart">
-                    <span>🛍️</span> Flipkart
-                </a>
-                <a href="#" id="meeshoBtn" class="platform-btn btn-meesho">
-                    <span>💃</span> Meesho
-                </a>
-            </div>
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                Redirecting...
-            </div>
-        </div>
+<header>
+<h1>🔥 Trending Deals</h1>
+<p>Best products at lowest prices</p>
+</header>
 
-        <div class="platform-grid">
-            <div class="platform-card" onclick="window.open('https://www.amazon.in', '_blank')">
-                <div class="platform-icon">🛒</div>
-                <h3>Amazon India</h3>
-                <p>Click for instant access to Amazon shopping</p>
-                <div class="quick-links">
-                    <a href="https://www.amazon.in" class="quick-link" target="_blank">Shop Now</a>
-                </div>
-            </div>
+<div class="grid">
 
-            <div class="platform-card" onclick="window.open('https://www.flipkart.com', '_blank')">
-                <div class="platform-icon">🛍️</div>
-                <h3>Flipkart</h3>
-                <p>India's biggest online shopping destination</p>
-                <div class="quick-links">
-                    <a href="https://www.flipkart.com" class="quick-link" target="_blank">Shop Now</a>
-                </div>
-            </div>
+<div class="card">
+<img src="https://via.placeholder.com/300x200">
+<h3>Wireless Earbuds</h3>
+<p>Top quality sound under budget</p>
+<a class="btn" href="https://www.amazon.in/dp/B0XXXX?tag=techwithrewar-21" target="_blank">Buy Now</a>
+</div>
 
-            <div class="platform-card" onclick="window.open('https://www.meesho.com', '_blank')">
-                <div class="platform-icon">💃</div>
-                <h3>Meesho</h3>
-                <p>Affordable shopping for everyone</p>
-                <div class="quick-links">
-                    <a href="https://www.meesho.com" class="quick-link" target="_blank">Shop Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/300x200">
+<h3>Smart Watch</h3>
+<p>Track fitness & notifications</p>
+<a class="btn" href="https://www.amazon.in/dp/B0XXXX?tag=techwithrewar-21" target="_blank">Buy Now</a>
+</div>
 
-    <script>
-        const searchInput = document.getElementById('productSearch');
-        const amazonBtn = document.getElementById('amazonBtn');
-        const flipkartBtn = document.getElementById('flipkartBtn');
-        const meeshoBtn = document.getElementById('meeshoBtn');
-        const loading = document.getElementById('loading');
+<div class="card">
+<img src="https://via.placeholder.com/300x200">
+<h3>Bluetooth Speaker</h3>
+<p>Powerful bass & portable</p>
+<a class="btn" href="https://www.amazon.in/dp/B0XXXX?tag=techwithrewar-21" target="_blank">Buy Now</a>
+</div>
 
-        // Search functionality
-        function searchOnPlatform(platform, query) {
-            if (!query.trim()) {
-                window.open(platform, '_blank');
-                return;
-            }
+</div>
 
-            const encodedQuery = encodeURIComponent(query.trim());
-            let searchUrl;
-
-            switch(platform) {
-                case 'amazon':
-                    searchUrl = `https://www.amazon.in/s?k=${encodedQuery}`;
-                    break;
-                case 'flipkart':
-                    searchUrl = `https://www.flipkart.com/search?q=${encodedQuery}`;
-                    break;
-                case 'meesho':
-                    searchUrl = `https://www.meesho.com/search?q=${encodedQuery}`;
-                    break;
-            }
-
-            showLoading();
-            setTimeout(() => {
-                window.open(searchUrl, '_blank');
-                hideLoading();
-            }, 1000);
-        }
-
-        function showLoading() {
-            loading.style.display = 'block';
-        }
-
-        function hideLoading() {
-            loading.style.display = 'none';
-        }
-
-        // Button event listeners
-        amazonBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const query = searchInput.value;
-            searchOnPlatform('amazon', query);
-        });
-
-        flipkartBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const query = searchInput.value;
-            searchOnPlatform('flipkart', query);
-        });
-
-        meeshoBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const query = searchInput.value;
-            searchOnPlatform('meesho', query);
-        });
-
-        // Enter key support
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                // Default to Amazon if no platform selected
-                searchOnPlatform('amazon', searchInput.value);
-            }
-        });
-
-        // Auto-focus on search input
-        searchInput.focus();
-
-        // Popular searches suggestions
-        const popularSearches = [
-            'iPhone 15', 'Samsung Galaxy', 'Laptop', 'Headphones', 
-            'Watch', 'Sneakers', 'T-Shirt', 'Kitchen Appliances'
-        ];
-
-        searchInput.addEventListener('input', function() {
-            // Clear suggestions or add autocomplete if needed
-        });
-    </script>
 </body>
 </html>
